@@ -37,10 +37,11 @@ bin/ralph
 # Connecting to example.zulipchat.com as ralph-bot@zulipchat.com...
 ```
 
-Ensure your changes have adequate test coverage before submitting a pull request.
+Before submitting a pull request, ensure your changes have adequate test coverage and adhere to the style guide.
 
 ```sh
 bin/rspec
+bin/rubocop
 ```
 
 ## License

@@ -5,6 +5,7 @@ gem 'wonder-llama', github: 'raws/wonder-llama'
 
 group :development do
   gem 'dotenv'
+  gem 'rubocop', '~> 0.82.0'
 end
 
 group :test do
