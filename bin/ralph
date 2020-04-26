@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'dotenv/load'
+
+$:.unshift File.join(__dir__, '../lib')
+require 'ralph'
+
+required_environment_variables = %w(ZULIP_API_KEY ZULIP_EMAIL ZULIP_HOST)
+
+unless required_environment_variables.all? { |key| ENV.key?(key) }
+  $stderr.puts "Please set #{required_environment_variables.join(', ')}"
+  exit 1
+end
+
+api_key = ENV['ZULIP_API_KEY']
+email = ENV['ZULIP_EMAIL']
+host = ENV['ZULIP_HOST']
+
+Ralph::Bot.new(api_key: api_key, email: email, host: host).run
