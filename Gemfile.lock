@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/raws/wonder-llama.git
-  revision: 0aa35d690fce59eeb7fddc997a72d2ec2a3404c5
+  revision: 40c96c78dc5daddd3e172d74e532e49e62a90dc8
   specs:
     wonder-llama (0.0.1)
 

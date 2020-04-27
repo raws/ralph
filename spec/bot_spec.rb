@@ -87,7 +87,7 @@ describe Ralph::Bot do
 
   describe '#run' do
     let(:bot) { described_class.new(client: client) }
-    let(:client) { TestClient.new }
+    let(:client) { QueuedClient.new }
 
     context 'when the server emits a heartbeat event' do
       before do
