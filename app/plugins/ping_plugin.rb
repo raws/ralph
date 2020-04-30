@@ -6,8 +6,7 @@ class PingPlugin
   private
 
   def ping?(event)
-    event.is_a?(WonderLlama::MessageEvent) &&
-      event.message.content.downcase.start_with?('ralph ping')
+    event.message? && event.message.content.downcase.start_with?('ralph ping')
   end
 
   def pong!(event)
