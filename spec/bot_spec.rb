@@ -126,7 +126,7 @@ describe Ralph::Bot do
       end
 
       it 'distributes the event to plugins that respond to #on_message' do
-        expect(@message_plugin).to have_received(:on_message).with(message: @message).once
+        expect(@message_plugin).to have_received(:on_message).with(@message).once
       end
     end
 
@@ -146,7 +146,7 @@ describe Ralph::Bot do
       end
 
       it 'distributes the event to plugins that respond to #on_unknown' do
-        expect(@unknown_plugin).to have_received(:on_unknown).with(event: @unknown_event).once
+        expect(@unknown_plugin).to have_received(:on_unknown).with(@unknown_event).once
       end
     end
   end

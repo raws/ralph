@@ -26,27 +26,8 @@ module Ralph
 
     def distribute_event_to_plugins(event)
       plugins.each do |plugin|
-        case event
-        when WonderLlama::HeartbeatEvent
-          distribute_heartbeat_event_to_plugin(plugin)
-        when WonderLlama::MessageEvent
-          distribute_message_event_to_plugin(plugin, event)
-        else
-          distribute_unknown_event_to_plugin(plugin, event)
-        end
+        EventRouter.new(plugin, event).deliver
       end
-    end
-
-    def distribute_heartbeat_event_to_plugin(plugin)
-      plugin.on_heartbeat if plugin.respond_to?(:on_heartbeat)
-    end
-
-    def distribute_message_event_to_plugin(plugin, message_event)
-      plugin.on_message(message: message_event.message) if plugin.respond_to?(:on_message)
-    end
-
-    def distribute_unknown_event_to_plugin(plugin, unknown_event)
-      plugin.on_unknown(event: unknown_event) if plugin.respond_to?(:on_unknown)
     end
   end
 end
