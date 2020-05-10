@@ -1,15 +1,16 @@
 class PingPlugin
-  def receive_event(event)
-    pong!(event) if ping?(event)
+  def on_message(message)
+    @message = message
+    pong! if ping?
   end
 
   private
 
-  def ping?(event)
-    event.message? && event.message.content.downcase.start_with?('ralph ping')
+  def ping?
+    @message.content.downcase.start_with?('ralph ping')
   end
 
-  def pong!(event)
-    event.message.reply('pong!')
+  def pong!
+    @message.reply('pong!')
   end
 end

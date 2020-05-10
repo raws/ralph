@@ -11,6 +11,8 @@ class IntegrationTestBot < IntegrationTestSession
   end
 
   def receive_event(event)
-    @plugins.each { |plugin| plugin.receive_event(event) }
+    @plugins.each do |plugin|
+      Ralph::EventRouter.new(plugin, event).deliver
+    end
   end
 end
