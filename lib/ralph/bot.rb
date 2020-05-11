@@ -1,18 +1,21 @@
 module Ralph
   class Bot
-    attr_accessor :logger
     attr_reader :client, :name, :plugins
+    attr_writer :logger
 
     def initialize(api_key: nil, client: nil, email: nil, host: nil, name:)
       @name = name
       @client = client || WonderLlama::Client.new(api_key: api_key, email: email, host: host)
-      @logger = Logger.new(STDOUT)
       @plugins = []
     end
 
     def install_plugin(plugin)
       plugins << plugin
       logger.info("Installed #{plugin}")
+    end
+
+    def logger
+      @logger ||= Logger.new(STDOUT)
     end
 
     def run

@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
-    - 'bin/{rspec,rubocop}'
+    - bin/{rake,rspec,rubocop}
+    - db/schema.rb
   NewCops: enable
 
 Layout/ArgumentAlignment:
@@ -14,7 +15,8 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*_spec.rb'
+    - Rakefile
+    - spec/**/*_spec.rb
 
 Style/Documentation:
   Enabled: false

@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  url: <%= ENV['DATABASE_URL'] %>
+  variables:
+    statement_timeout: <%= ENV.fetch('DB_STATEMENT_TIMEOUT', '30s') %>
+
+development:
+  <<: *default
+  database: ralph_development
+
+production:
+  <<: *default
+
+staging:
+  <<: *default
+
+test:
+  <<: *default
+  database: ralph_test
