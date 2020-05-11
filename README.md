@@ -15,7 +15,7 @@ You'll need to set the following environment variables:
 
 These environment variables are required in a non-development environment:
 
-| Name | Description | Default |
+| Name | Description | Example |
 |------|-------------|---------|
 | `DATABASE_URL` | PostgreSQL [connection URI](https://www.postgresql.org/docs/current/libpq-connect.html#id-1.7.3.8.3.6). | `postgres://user:pass@host:port/database` |
 
