@@ -1,7 +1,7 @@
 describe Ralph::Bot do
   let(:bot) do
     described_class.new(api_key: 'test-api-key', email: 'test@example.com',
-      host: 'test.example.com')
+      host: 'test.example.com', name: 'Ralph')
   end
 
   before do
@@ -26,7 +26,7 @@ describe Ralph::Bot do
     end
 
     context 'with a custom client' do
-      let(:bot) { described_class.new(client: custom_client) }
+      let(:bot) { described_class.new(client: custom_client, name: 'Ralph') }
       let(:custom_client) { double('client') }
       it { is_expected.to eq(custom_client) }
     end
@@ -86,7 +86,7 @@ describe Ralph::Bot do
   end
 
   describe '#run' do
-    let(:bot) { described_class.new(client: client) }
+    let(:bot) { described_class.new(client: client, name: 'Ralph') }
     let(:client) { QueuedClient.new }
 
     context 'when the server emits a heartbeat event' do
@@ -116,7 +116,7 @@ describe Ralph::Bot do
         bot.install_plugin(boring_plugin)
         bot.install_plugin(@message_plugin)
 
-        @message = double('message')
+        @message = double('message', content: 'hello!')
         message_event = WonderLlama::MessageEvent.new(client: bot.client,
           params: { 'id' => 1 })
         allow(message_event).to receive(:message).and_return(@message)

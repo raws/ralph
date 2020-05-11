@@ -8,4 +8,5 @@ Dir[support_files_pattern].sort.each { |file| require(file) }
 
 RSpec.configure do |config|
   config.include(HaveSentMessageMatcher)
+  config.include(MessageWithContentExpectation)
 end

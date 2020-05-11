@@ -12,7 +12,7 @@ class IntegrationTestBot < IntegrationTestSession
 
   def receive_event(event)
     @plugins.each do |plugin|
-      Ralph::EventRouter.new(plugin, event).deliver
+      Ralph::EventRouter.new(plugin, event, bot_name: name).deliver
     end
   end
 end

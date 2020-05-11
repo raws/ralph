@@ -6,7 +6,7 @@ require 'dotenv/load'
 $LOAD_PATH.unshift(File.join(__dir__, '../lib'))
 require 'ralph'
 
-required_environment_variables = %w[ZULIP_API_KEY ZULIP_EMAIL ZULIP_HOST]
+required_environment_variables = %w[BOT_NAME ZULIP_API_KEY ZULIP_EMAIL ZULIP_HOST]
 
 unless required_environment_variables.all? { |key| ENV.key?(key) }
   warn "Please set #{required_environment_variables.join(', ')}"
@@ -16,5 +16,11 @@ end
 api_key = ENV['ZULIP_API_KEY']
 email = ENV['ZULIP_EMAIL']
 host = ENV['ZULIP_HOST']
+name = ENV['BOT_NAME']
 
-Ralph::Bot.new(api_key: api_key, email: email, host: host).run
+bot = Ralph::Bot.new(api_key: api_key, email: email, host: host, name: name)
+
+require_relative '../app/plugins/ping_plugin'
+bot.install_plugin(PingPlugin.new)
+
+bot.run

@@ -30,6 +30,11 @@ describe PingPlugin do
       it { is_expected.to_not have_sent_message }
     end
 
+    context 'when someone addresses the bot with just its name' do
+      before { human.send_message('ralph', stream: 'pings', topic: 'shenanigans') }
+      it { is_expected.to_not have_sent_message }
+    end
+
     context 'when the message is not a ping' do
       before { human.send_message('unrelated', stream: 'pings', topic: 'shenanigans') }
       it { is_expected.to_not have_sent_message }

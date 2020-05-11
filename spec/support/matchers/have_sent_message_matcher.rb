@@ -1,4 +1,8 @@
 module HaveSentMessageMatcher
+  def have_sent_message(expected_content = nil)
+    HaveSentMessage.new(expected_content)
+  end
+
   class HaveSentMessage
     def initialize(expected_content = nil)
       @expected_content = expected_content
@@ -112,9 +116,5 @@ module HaveSentMessageMatcher
         true
       end
     end
-  end
-
-  def have_sent_message(expected_content = nil)
-    HaveSentMessage.new(expected_content)
   end
 end

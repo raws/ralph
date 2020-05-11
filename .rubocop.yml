@@ -3,6 +3,9 @@ AllCops:
     - 'bin/{rspec,rubocop}'
   NewCops: enable
 
+Layout/ArgumentAlignment:
+  Enabled: false
+
 Layout/HashAlignment:
   EnforcedLastArgumentHashStyle: ignore_implicit
 

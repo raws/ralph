@@ -10,7 +10,7 @@ describe Ralph::EventRouter do
   end
 
   describe '#deliver' do
-    subject! { described_class.new(plugin, event).deliver }
+    subject! { described_class.new(plugin, event, bot_name: 'Ralph').deliver }
 
     context 'with a heartbeat event' do
       let(:event) { heartbeat_event }
@@ -28,17 +28,34 @@ describe Ralph::EventRouter do
 
     context 'with a message event' do
       let(:event) { message_event(message) }
-      let(:message) { double('message') }
 
-      context 'when the plugin responds to #on_message' do
-        let(:plugin) { double('message plugin', on_message: true) }
+      context 'when the message is addressed to the bot' do
+        let(:message) { double('message', content: 'ralph: foo bar') }
 
-        it 'calls #on_message with the message' do
-          expect(plugin).to have_received(:on_message).with(message).once
+        context 'when the plugin responds to #on_addressed' do
+          let(:plugin) { double('addressed plugin', on_addressed: true) }
+
+          it 'calls #on_addressed with a message stripped of the bot name' do
+            expect(plugin).to have_received(:on_addressed).with(message_with_content('foo bar'))
+          end
         end
+
+        include_examples 'when the plugin does not listen for the event', :on_addressed
       end
 
-      include_examples 'when the plugin does not listen for the event', :on_message
+      context 'when the message is not addressed to the bot' do
+        let(:message) { double('message', content: 'foo bar') }
+
+        context 'when the plugin responds to #on_message' do
+          let(:plugin) { double('message plugin', on_message: true) }
+
+          it 'calls #on_message with the message' do
+            expect(plugin).to have_received(:on_message).with(message).once
+          end
+        end
+
+        include_examples 'when the plugin does not listen for the event', :on_message
+      end
     end
 
     context 'with an unknown event' do

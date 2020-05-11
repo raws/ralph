@@ -1,5 +1,5 @@
 class PingPlugin
-  def on_message(message)
+  def on_addressed(message)
     @message = message
     pong! if ping?
   end
@@ -7,7 +7,7 @@ class PingPlugin
   private
 
   def ping?
-    @message.content.downcase.start_with?('ralph ping')
+    @message.content.downcase.start_with?('ping')
   end
 
   def pong!

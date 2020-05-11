@@ -8,6 +8,7 @@ You'll need to set the following environment variables:
 
 | Name | Description | Example |
 |------|-------------|---------|
+| `BOT_NAME` | The name to which your bot will respond. | `Ralph` |
 | `ZULIP_API_KEY` | Your Zulip bot's [API key](https://zulipchat.com/api/rest). | `443e78ed81c758c6ebcbcfea` |
 | `ZULIP_EMAIL` | Your Zulip bot's email. | `ralph-bot@zulipchat.com` |
 | `ZULIP_HOST` | Your Zulip server's hostname. | `example.zulipchat.com` |
