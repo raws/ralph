@@ -24,7 +24,7 @@ namespace :db do
   end
 
   desc 'Run database migrations'
-  task migrate: :configure_active_record_tasks do |task|
+  task migrate: :configure_active_record_tasks do
     ActiveRecord::Base.logger = Ralph.logger
     ActiveRecord::Migration.verbose = false
     ActiveRecord::MigrationContext.new(Ralph.root.join('db/migrate'),
@@ -35,7 +35,7 @@ namespace :db do
   end
 
   desc 'Roll back the last database migration'
-  task rollback: :configure_active_record_tasks do |task|
+  task rollback: :configure_active_record_tasks do
     ActiveRecord::Base.logger = Ralph.logger
     ActiveRecord::Migration.verbose = false
     ActiveRecord::MigrationContext.new(Ralph.root.join('db/migrate'),
