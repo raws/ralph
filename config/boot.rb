@@ -53,10 +53,10 @@ module Ralph
 
   module Boot
     AUTOLOAD_PATHS = %w[app/models app/plugins].freeze
+    DEFAULT_TIME_ZONE = 'Eastern Time (US & Canada)'.freeze
     REQUIRED_ENVIRONMENT_VARIABLES = %w[BOT_NAME ZULIP_API_KEY ZULIP_EMAIL ZULIP_HOST].freeze
 
     def self.connect_to_database
-      require 'active_record'
       ActiveRecord::Base.configurations = Ralph.database_configs
       ActiveRecord::Base.establish_connection(Ralph.current_database_config)
     end
@@ -79,6 +79,7 @@ module Ralph
       configure_logger
       load_bundler_dependencies
       configure_autoloader
+      configure_time_zone
       load_environment_config
     end
 
@@ -112,6 +113,14 @@ module Ralph
       Ralph.root = Pathname.new(File.expand_path(File.join(__dir__, '..')))
     end
     private_class_method :configure_root
+
+    def self.configure_time_zone
+      require 'active_record'
+      Time.zone_default = Time.find_zone!(DEFAULT_TIME_ZONE)
+      ActiveRecord::Base.time_zone_aware_attributes = true
+      ActiveRecord::Base.default_timezone = :utc
+    end
+    private_class_method :configure_time_zone
 
     def self.ensure_required_environment_variables!
       return if REQUIRED_ENVIRONMENT_VARIABLES.all? { |key| ENV.key?(key) }
