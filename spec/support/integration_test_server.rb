@@ -5,8 +5,9 @@ class IntegrationTestServer
     @events = []
     @sessions = []
 
-    @last_event_id = -1
-    @last_message_id = -1
+    @last_event_id = 0
+    @last_message_id = 0
+    @last_session_id = 0
   end
 
   def broadcast_event(from:, event:)
@@ -36,12 +37,20 @@ class IntegrationTestServer
     @events.filter_map { |from, event| from == session && event }
   end
 
+  def find_session(name)
+    sessions.find { |session| session.name == name }
+  end
+
   def next_event_id
     @last_event_id += 1
   end
 
   def next_message_id
     @last_message_id += 1
+  end
+
+  def next_session_id
+    @last_session_id += 1
   end
 
   private
