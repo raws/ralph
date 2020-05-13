@@ -34,6 +34,7 @@ class AnniversariesPlugin
     name = match_data[:name]
     birthday = Date.parse(match_data[:birthday])
 
+    # TODO: Verify that the user exists on the Zulip server
     user = User.where('name ILIKE ?', "#{name}%").first
 
     if user
