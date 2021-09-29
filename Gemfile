@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.7.1'
 
-gem 'activerecord', '~> 6.0.3'
-gem 'activesupport', '~> 6.0.3'
+gem 'activerecord', '~> 6.1.3'
+gem 'activesupport', '~> 6.1.3'
 gem 'pg', '~> 1.2.3'
 gem 'rake', '~> 13'
 gem 'wonder-llama', github: 'raws/wonder-llama'
